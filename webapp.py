@@ -11,8 +11,16 @@ from xgboost import plot_importance, XGBClassifier
 
 st.title("💼 Telco 고객 이탈 예측")
 
+# 📥 GitHub에서 직접 데이터 로딩
+CSV_URL = "https://raw.githubusercontent.com/codingjs12/streamlit/main/Telco.csv"  # ← 여기를 본인 주소로 수정
+
+@st.cache_data
+def load_data(url):
+    return pd.read_csv(url)
+
+df = load_data(CSV_URL)
 # 파일 업로드
-uploaded_file = st.file_uploader("Telco.csv", type="csv")
+uploaded_file = df
 
 if uploaded_file:
     df = pd.read_csv(uploaded_file)
